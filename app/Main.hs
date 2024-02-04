@@ -2,6 +2,7 @@ module Main where
 
 
 import Graphics.Gloss
+import Graphics.Gloss.Interface.IO.Game
 
 import Model
 import View
@@ -14,8 +15,13 @@ window = InWindow "Pong" (1500, 800) (10, 10)
 background :: Color
 background = black
 
+
+-- playIO, mainly because it allows me to print values in the three main functions for debugging
+-- eventually also for threading to allow audio
 main :: IO ()
-main = play window background 30 initialState render handleEvent update
+main = playIO window background 30 initialState render handleEventIO updateIO
+
+
 
 
 -- idea for fullscreen
