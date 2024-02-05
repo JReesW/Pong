@@ -19,7 +19,7 @@ background = black
 -- playIO, mainly because it allows me to print values in the three main functions for debugging
 -- eventually also for threading to allow audio
 main :: IO ()
-main = playIO window background 30 initialState render handleEventIO updateIO
+main = playIO window background 30 (Menu 0) render handleEventIO updateIO
 
 
 

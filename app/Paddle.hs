@@ -59,3 +59,10 @@ bounceFromPaddle delta b p | colliding b p = move $ b {ball_x = placeNextTo b p,
           cap n | n < -5    = -5
                 | n >  5    =  5
                 | otherwise =  n
+
+
+-- 0 if no one scored, -1 if p1 scored, 1 if p2 scored
+scored :: Ball -> Int
+scored b | ball_x b < (-760) =  1
+         | ball_x b >   760  = -1
+         | otherwise         =  0

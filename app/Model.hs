@@ -21,12 +21,18 @@ data Scores = Scores {
 } deriving (Show)
 
 
-data GameState = GameState {
+data GameState = Menu Float
+               | Result Int 
+               | Game {
+    -- state :: State,
     paddles :: [Paddle],
     ball :: Ball,
     scores :: Scores,
-    keypresses :: [KeyPress]
-} deriving (Show)
+    keypresses :: [KeyPress],
+    wait :: Int,
+    lastScorer :: Float
+}
+    deriving (Show)
 
 
 data KeyPress = KeyS
@@ -34,10 +40,21 @@ data KeyPress = KeyS
     deriving (Show, Eq)
 
 
+initialBall :: Float -> Ball
+initialBall dx = Ball {ball_x = 0.0, ball_y = 0.0, ball_dx = dx, ball_dy = 0}
+
+
+initialPaddles :: [Paddle]
+initialPaddles = [Paddle {paddle_x = -700.0, paddle_y = 0}, Paddle {paddle_x = 700.0, paddle_y = 0}]
+
+
 initialState :: GameState
-initialState = GameState {
-    paddles = [Paddle {paddle_x = -700.0, paddle_y = 0}, Paddle {paddle_x = 700.0, paddle_y = 0}],
-    ball = Ball {ball_x = -150.0, ball_y = 0.0, ball_dx = -400.0, ball_dy = 0},
+initialState = Game {
+    -- state = Game,
+    paddles = initialPaddles,
+    ball = initialBall (-400.0),
     scores = Scores {score_1 = 0, score_2 = 0},
-    keypresses = []
+    keypresses = [],
+    wait = 0,
+    lastScorer = -1
 }

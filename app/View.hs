@@ -25,9 +25,22 @@ renderScores scs = pictures
 
 
 render :: GameState -> IO Picture
-render gs = do
+render gs@Game{} = do
     let pics = pictures [ renderPaddles (paddles gs)
                         , renderBall (ball gs)
                         , renderScores (scores gs)]
 
     return pics
+
+render (Menu n) = do
+    let pics = pictures [ translate 93.75 200 $ scale 2.5 2.5 $ drawString "pong"
+                        , translate 37.5 ( -50) $ drawString "play"
+                        , translate 37.5 (-100) $ drawString "quit"
+                        , translate (-60) (-50 * (n + 1)) $ color white $ rectangleSolid 7.5 7.5]
+    return pics
+
+render (Result n) = do
+    let pics = pictures [ translate 300 200 $ scale 2 2 $ drawString ("player " ++ winner n ++ " wins")]
+    return pics
+  where winner (-1) = "1"
+        winner   1  = "2"
