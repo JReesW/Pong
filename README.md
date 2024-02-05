@@ -9,4 +9,6 @@ Pong, written in Haskell using gloss
 Maybe soon I'll try to upload a build that comes with glut32
 
 # How to play
-Use `W` and `S` to move your paddle up and down respectively.
+Use `W` and `S` to navigate the menu, and `Space` to select.  
+Press `Space` to start the game.  
+Use `W` and `S` to move your paddle up and down respectively.  
